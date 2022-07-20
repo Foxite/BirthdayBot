@@ -4,12 +4,12 @@ namespace BirthdayBot;
 /// Provides the current time. Useful for mocking.
 /// </summary>
 public interface IClock {
-	DateTimeOffset GetUtcNow();
+	DateTime GetDate();
 }
 
 /// <summary>
 /// Provides the real current time. Not useful for mocking.
 /// </summary>
 public class SystemClock : IClock {
-	public DateTimeOffset GetUtcNow() => DateTimeOffset.UtcNow;
+	public DateTime GetDate() => DateTime.Now.Date;
 }

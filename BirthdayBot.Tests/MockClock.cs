@@ -4,13 +4,13 @@ namespace BirthdayBot.Tests;
 /// Lets you mock the current time.
 /// </summary>
 public class MockClock : IClock {
-	private DateTimeOffset m_Now = DateTimeOffset.UtcNow;
+	private DateTime m_Now = DateTime.Now;
 
-	public DateTimeOffset GetUtcNow() {
+	public DateTime GetDate() {
 		return m_Now;
 	}
 
-	public void SetUtcNow(DateTimeOffset now) {
+	public void SetDate(DateTime now) {
 		m_Now = now;
 	}
 }
