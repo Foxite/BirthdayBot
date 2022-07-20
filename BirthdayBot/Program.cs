@@ -1,16 +1,10 @@
-﻿using System.Globalization;
-using BirthdayBot;
-using CsvHelper;
-using CsvHelper.Configuration;
+﻿using BirthdayBot;
 using DSharpPlus;
 using DSharpPlus.Entities;
 
-using var csvReader = new CsvReader(File.OpenText(Environment.GetEnvironmentVariable("CSV_PATH") ?? "birthdays.csv"), new CsvConfiguration(CultureInfo.InvariantCulture));
-csvReader.Read();
-csvReader.ReadHeader();
-
-List<Birthday> birthdays = csvReader.GetRecords<Birthday>()
-	.Where(birthday => birthday.Date.Date == DateTimeOffset.Now.Date).ToList();
+IClock clock = new SystemClock();
+IBirthdayProvider birthdayProvider = new CsvBirthdayProvider(Environment.GetEnvironmentVariable("CSV_PATH") ?? "birthdays.csv");
+ICollection<Birthday> birthdays = await birthdayProvider.GetBirthdays(clock);
 
 if (birthdays.Count > 0) {
 	var discord = new DiscordWebhookClient();

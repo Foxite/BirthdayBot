@@ -6,11 +6,11 @@ WORKDIR /src
 COPY ["BirthdayBot/BirthdayBot.csproj", "BirthdayBot/"]
 RUN dotnet restore "BirthdayBot/BirthdayBot.csproj"
 COPY . .
-WORKDIR "/src/BirthdayBot"
-RUN dotnet build "BirthdayBot.csproj" -c Release -o /app/build
+RUN dotnet build "BirthdayBot/BirthdayBot.csproj" -c Release -o /app/build && \
+    dotnet test "BirthdayBot.Tests/BirthdayBot.Tests.csproj"
 
 FROM build AS publish
-RUN dotnet publish "BirthdayBot.csproj" -c Release -o /app/publish
+RUN dotnet publish "BirthdayBot/BirthdayBot.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
