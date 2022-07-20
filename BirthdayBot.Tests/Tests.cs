@@ -7,7 +7,7 @@ public class Tests {
 	public void Setup() {
 		m_Clock = new MockClock();
 	}
-
+ 
 	public void TestWithClockOffset(IBirthdayProvider provider, TimeSpan timezone, TimeSpan clockOffset) {
 		m_Clock.SetUtcNow(new DateTimeOffset(2022, 7, 2, 0, 0, 0, timezone) + clockOffset);
 		Assert.That(provider.GetBirthdays(m_Clock).Result, Has.Count.EqualTo(1));
@@ -51,10 +51,14 @@ public class Tests {
 		TestWithTimezone(provider, TimeSpan.FromHours(-12));
 	}
 
+	/// <summary>
+	/// Tests only the functionality in <see cref="MemoryBirthdayProvider"/>, by manually specifying birthdays.
+	/// </summary>
 	[Test]
 	public void TestMemoryProvider() {
 		TestWithProvider(new MockBirthdayProvider(
 			new List<Birthday>() {
+				// These are the exact same ones as in the csv.
 				new Birthday(DateTimeOffset.Parse("2022-07-02 +0000"), "1", 969681332697448509UL),
 				new Birthday(DateTimeOffset.Parse("2022-07-18 +0000"), "2", 969681377425514616UL),
 				new Birthday(DateTimeOffset.Parse("2022-07-19 +0000"), "3", 969681384304160788UL),
@@ -64,6 +68,10 @@ public class Tests {
 		);
 	}
 
+	/// <summary>
+	/// Tests the csv loading functionality of <see cref="CsvBirthdayProvider"/>.
+	/// It also technically tests <see cref="MemoryBirthdayProvider"/> so you should also run <see cref="TestMemoryProvider"/> to ensure your problems are actually related to csv code.
+	/// </summary>
 	[Test]
 	public void TestCsvProvider() {
 		TestWithProvider(new CsvBirthdayProvider("birthdays.csv"));

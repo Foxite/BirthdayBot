@@ -4,6 +4,9 @@ using CsvHelper.Configuration;
 
 namespace BirthdayBot;
 
+/// <summary>
+/// Reads all birthdays (from a file, or whatever) and stores it in memory, then uses linq to find today's birthdays.
+/// </summary>
 public abstract class MemoryBirthdayProvider : IBirthdayProvider {
 	// Has to be lazy, we can't call ReadBirthdays in the constructor (or we can restructure this class to use another provider, but no.)
 	private readonly Lazy<ICollection<Birthday>> m_Birthdays;
@@ -19,6 +22,9 @@ public abstract class MemoryBirthdayProvider : IBirthdayProvider {
 	}
 }
 
+/// <summary>
+/// Extends <see cref="MemoryBirthdayProvider"/> and reads birthdays from a CSV file.
+/// </summary>
 public class CsvBirthdayProvider : MemoryBirthdayProvider {
 	private readonly string m_FilePath;
 
