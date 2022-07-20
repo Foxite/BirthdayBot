@@ -9,6 +9,7 @@ Use in conjunction with [camilin87/docker-cron](https://github.com/cshtdd/docker
 Environment variables:
 - WEBHOOK_URI, required
 - CSV_PATH, optional (default is `birthdays.csv` in the current working directory, which is `/app`)
+- TZ, optional, but you should set it according to your target audience. Provide a tzdata file relative to /usr/share/zoneinfo (ex: Europe/Paris)
 
 ## Csv layout
 ```csv
