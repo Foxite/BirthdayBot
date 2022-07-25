@@ -18,7 +18,8 @@ public abstract class MemoryBirthdayProvider : IBirthdayProvider {
 	protected abstract ICollection<Birthday> ReadBirthdays();
 
 	public Task<ICollection<Birthday>> GetBirthdays(IClock clock) {
-		return Task.FromResult((ICollection<Birthday>) m_Birthdays.Value.Where(birthday => birthday.Date == clock.GetDate()).ToList());
+		DateTime today = clock.GetDate();
+		return Task.FromResult((ICollection<Birthday>) m_Birthdays.Value.Where(birthday => birthday.Month == today.Month && birthday.Day == today.Day).ToList());
 	}
 }
 

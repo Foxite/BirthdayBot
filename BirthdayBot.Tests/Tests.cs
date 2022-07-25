@@ -45,11 +45,11 @@ public class Tests {
 		TestProvider(new MockBirthdayProvider(
 			new List<Birthday>() {
 				// These are the exact same ones as in the csv.
-				new Birthday(DateTime.Parse("2022-07-02"), "1", 969681332697448509UL),
-				new Birthday(DateTime.Parse("2022-07-18"), "2", 969681377425514616UL),
-				new Birthday(DateTime.Parse("2022-07-19"), "3", 969681384304160788UL),
-				new Birthday(DateTime.Parse("2022-07-20"), "4", 969681394731221042UL),
-				new Birthday(DateTime.Parse("2022-07-29"), "5", 958327390956814459UL),
+				new Birthday(07, 02, "1", 969681332697448509UL),
+				new Birthday(07, 18, "2", 969681377425514616UL),
+				new Birthday(07, 19, "3", 969681384304160788UL),
+				new Birthday(07, 20, "4", 969681394731221042UL),
+				new Birthday(07, 29, "5", 958327390956814459UL),
 			})
 		);
 	}
