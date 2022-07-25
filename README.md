@@ -13,6 +13,6 @@ Environment variables:
 
 ## Csv layout
 ```csv
-Date,Name,Id
-2022-07-01 +0000,Display name,969681332697448509
+Month,Day,Id,Name
+07,01,969681332697448509,Display name
 ```
