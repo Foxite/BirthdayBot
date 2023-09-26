@@ -13,6 +13,11 @@ FROM build AS publish
 RUN dotnet publish "BirthdayBot/BirthdayBot.csproj" -c Release -o /app/publish
 
 FROM base AS final
+RUN apt update && apt -y install cron dumb-init
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["BirthdayBot/docker/bin/", "/usr/local/bin/"]
+RUN bash -c 'chmod +x /usr/local/bin/{run_on_schedule,schedule}'
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["dotnet", "BirthdayBot.dll"]

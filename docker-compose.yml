@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: BirthdayBot/Dockerfile
+    command: dotnet /app/BirthdayBot.dll
+#    command: schedule
+    environment:
+      SCHEDULE: "0 0 * * *"
+      CSV_PATH: 
+      TZ: Europe/Amsterdam
+      WEBHOOK_URI: https://discord.com/api/webhooks/123/token

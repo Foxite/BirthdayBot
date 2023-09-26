@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using BirthdayBot;
+﻿using BirthdayBot;
 using DSharpPlus;
 using DSharpPlus.Entities;
 
