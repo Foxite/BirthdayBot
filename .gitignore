@@ -1,4 +1,5 @@
 **/bin
+!BirthdayBot/docker/bin
 **/obj
 .idea
 *.user
