@@ -7,10 +7,12 @@ IBirthdayProvider birthdayProvider = new CsvBirthdayProvider(Environment.GetEnvi
 ICollection<Birthday> birthdays = await birthdayProvider.GetBirthdays(clock);
 
 if (birthdays.Count > 0) {
+	IBirthdayPresenter presenter = new BirthdayPresenter(Environment.GetEnvironmentVariable("MESSAGE_FORMAT"));
+	
 	var discord = new DiscordWebhookClient();
 	DiscordWebhook webhook = await discord.AddWebhookAsync(new Uri(Environment.GetEnvironmentVariable("WEBHOOK_URI")!));
 
 	foreach (Birthday birthday in birthdays) {
-		await webhook.ExecuteAsync(birthday.Present());
+		await webhook.ExecuteAsync(presenter.Present(birthday));
 	}
 }
